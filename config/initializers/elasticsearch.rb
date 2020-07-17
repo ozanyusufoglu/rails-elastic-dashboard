@@ -4,6 +4,7 @@ require 'elasticsearch'
 require 'elasticsearch/persistence'
 require 'base64'
 require 'json'
+require 'elasticsearch/dsl'
 
 class LogRepository
   include Elasticsearch::Persistence::Repository

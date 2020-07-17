@@ -32,6 +32,7 @@ gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git
 gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
 gem 'elasticsearch-rails', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
 gem 'elasticsearch-persistence', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
+gem 'elasticsearch-dsl', '~> 0.1.4'
 
 gem 'bootstrap', '~> 4.5.0'
 #gem 'bootstrap-sass', '3.4.1'

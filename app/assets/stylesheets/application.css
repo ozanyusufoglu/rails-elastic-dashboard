@@ -55,6 +55,9 @@ textarea {
   justify-content: space-around;
 }
 
+.navigation {
+  background-color: black
+}
 /* typography */
 h1,
 h2,

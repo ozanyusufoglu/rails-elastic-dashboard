@@ -25,6 +25,7 @@ GIT
       elasticsearch-transport (= 6.8.2)
     elasticsearch-api (6.8.2)
       multi_json
+    elasticsearch-dsl (0.1.5)
     elasticsearch-transport (6.8.2)
       faraday (~> 1)
       multi_json
@@ -288,6 +289,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chartkick
   elasticsearch!
+  elasticsearch-dsl (~> 0.1.4)
   elasticsearch-model!
   elasticsearch-persistence!
   elasticsearch-rails!
