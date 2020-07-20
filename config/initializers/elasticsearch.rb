@@ -15,8 +15,6 @@ class LogRepository
       indexes :text, analyzer: 'english'
     end
   end
-
-
 end
 
 class Log

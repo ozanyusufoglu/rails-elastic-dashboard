@@ -14,50 +14,53 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
 /* universal */
+
 body {
-  padding-top: 60px;
   background-color: rgba(249, 250, 252,1);
 }
 
-section {
-  overflow: auto;
+.container-fluid{
+  align-items: stretch;
 }
 
-textarea {
-  resize: vertical;
-}
-
-.center {
-  text-align: center;
-}
-
-.center h1 {
-  margin-bottom: 10px;
-}
-
-.chart {
+.top-menu{
+  background-color: white;
+  height: 2em;
   box-shadow: 0 2px 2px -1px rgba(152, 162, 179, 0.3), 0 1px 5px -2px rgba(152, 162, 179, 0.3);
-  padding: 2em;
-  margin: 1em;
-  background-color: #FFF
-}
-
-.container{
-  display: flex;
-  flex-wrap: wrap;
-
-}
-
-.row{
-  flex-direction: row;
-  justify-content: space-around;
 }
 
 .navigation {
-  background-color: black
+  background-color: white;
+  box-shadow: 0 2px 2px -1px rgba(152, 162, 179, 0.3), 0 1px 5px -2px rgba(152, 162, 179, 0.3);
 }
+
+.chart-area{
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-grow: 5
+}
+.col-lg-4{
+  padding: 0.5em
+}
+.col-lg-6{
+  padding: 0.5em
+}
+.row{
+  justify-content: space-between;
+}
+
+.chart-card{
+  padding: 2.5em;
+  box-shadow: 0 2px 2px -1px rgba(152, 162, 179, 0.3), 0 1px 5px -2px rgba(152, 162, 179, 0.3);
+  background-color: #FFF;
+  border-radius: 5px;
+}
+
+
+
+
 /* typography */
 h1,
 h2,
@@ -73,6 +76,7 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  padding-top: 60px;
 }
 
 h2 {
@@ -82,9 +86,4 @@ h2 {
   text-align: center;
   font-weight: normal;
   color: #777;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
 }
