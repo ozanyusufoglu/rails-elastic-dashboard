@@ -1,35 +1,3 @@
-GIT
-  remote: git://github.com/elastic/elasticsearch-rails.git
-  revision: 97862b5baa8a79030103fd2758b8d374439b8f68
-  branch: 6.x
-  specs:
-    elasticsearch-model (6.1.0)
-      activesupport (> 3)
-      elasticsearch (~> 6)
-      hashie
-    elasticsearch-persistence (6.1.0)
-      activemodel (> 4)
-      activesupport (> 4)
-      elasticsearch (~> 6)
-      elasticsearch-model (>= 5)
-      hashie
-    elasticsearch-rails (6.1.0)
-
-GIT
-  remote: git://github.com/elasticsearch/elasticsearch-ruby.git
-  revision: d96cf704156695533bb3fe418e9a0259a0172f53
-  branch: 6.x
-  specs:
-    elasticsearch (6.8.2)
-      elasticsearch-api (= 6.8.2)
-      elasticsearch-transport (= 6.8.2)
-    elasticsearch-api (6.8.2)
-      multi_json
-    elasticsearch-dsl (0.1.5)
-    elasticsearch-transport (6.8.2)
-      faraday (~> 1)
-      multi_json
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,14 +58,15 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    autoprefixer-rails (9.8.5)
+    ansi (1.5.0)
+    autoprefixer-rails (9.8.6.1)
       execjs
     bindex (0.8.1)
-    bootsnap (1.4.6)
+    bootsnap (1.4.7)
       msgpack (~> 1.0)
-    bootsnap (1.4.6-java)
+    bootsnap (1.4.7-java)
       msgpack (~> 1.0)
-    bootstrap (4.5.0)
+    bootstrap (4.5.2)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
@@ -111,10 +80,33 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    chartkick (3.3.1)
+    chartkick (3.4.0)
     childprocess (3.0.0)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
+    elasticsearch (7.8.1)
+      elasticsearch-api (= 7.8.1)
+      elasticsearch-transport (= 7.8.1)
+    elasticsearch-api (7.8.1)
+      multi_json
+    elasticsearch-dsl (0.1.9)
+    elasticsearch-extensions (0.0.31)
+      ansi
+      elasticsearch
+    elasticsearch-model (7.1.0)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-persistence (7.1.0)
+      activemodel (> 4)
+      activesupport (> 4)
+      elasticsearch (~> 7)
+      elasticsearch-model (= 7.1.0)
+      hashie
+    elasticsearch-rails (7.1.0)
+    elasticsearch-transport (7.8.1)
+      faraday (~> 1)
+      multi_json
     erubi (1.9.0)
     ethon (0.12.0)
       ffi (>= 1.3.0)
@@ -127,10 +119,10 @@ GEM
     ffi (1.13.1-x86-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    groupdate (5.0.0)
+    groupdate (5.1.0)
       activesupport (>= 5)
     hashie (4.1.0)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -288,11 +280,13 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   chartkick
-  elasticsearch!
-  elasticsearch-dsl (~> 0.1.4)
-  elasticsearch-model!
-  elasticsearch-persistence!
-  elasticsearch-rails!
+  elasticsearch (~> 7.8)
+  elasticsearch-api (~> 7.8)
+  elasticsearch-dsl (~> 0.1.9)
+  elasticsearch-extensions (~> 0.0.31)
+  elasticsearch-model (~> 7.1)
+  elasticsearch-persistence (~> 7.1)
+  elasticsearch-rails (~> 7.1)
   groupdate
   jbuilder (~> 2.7)
   jquery-rails

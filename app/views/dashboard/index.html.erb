@@ -1,11 +1,18 @@
 <div class="container-fluid">
 
   <%# <%= line_chart @isolated.group_by_day(:timestamp).count %>
-    <%# <%  Chartkick.options = { colors: ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8"] }%>
+    <%# <%  Chartkick.options = { colors: ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8"] } %>
 
       <div class="container chart-area">
 
         <h1>Elasticsearch Repo Logs</h1>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
 
         <div class="row">
           <div class="col-lg-4">
@@ -76,9 +83,7 @@
             </div>
           </div>
         </div>
-
       </div>
+     </div>
 
-    </div>
-
-    <%# <%= debug @all.response.hits.hits.first["_source"]["timestamp"].class %>
+     <% console %>

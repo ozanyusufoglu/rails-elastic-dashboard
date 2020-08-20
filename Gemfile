@@ -28,11 +28,15 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git', branch: '6.x'
-gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
-gem 'elasticsearch-rails', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
-gem 'elasticsearch-persistence', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
-gem 'elasticsearch-dsl', '~> 0.1.4'
+# all required elasticsearch gems
+gem 'elasticsearch', '~> 7.8'
+gem 'elasticsearch-api', '~> 7.8'
+gem 'elasticsearch-model', '~> 7.1'
+gem 'elasticsearch-rails', '~> 7.1'
+gem 'elasticsearch-persistence', '~> 7.1'
+
+gem 'elasticsearch-extensions', '~> 0.0.31'
+gem 'elasticsearch-dsl', '~> 0.1.9'
 
 gem 'bootstrap', '~> 4.5.0'
 #gem 'bootstrap-sass', '3.4.1'
