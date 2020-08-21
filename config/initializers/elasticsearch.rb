@@ -21,7 +21,7 @@ class Repository
   include Elasticsearch::Persistence::Repository
   include Elasticsearch::Persistence::Repository::DSL
 
-  index_name 'extension__url'
+  index_name '*__*'
   #document_type '_doc'
   klass Log
 
