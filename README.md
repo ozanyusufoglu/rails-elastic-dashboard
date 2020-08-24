@@ -1,24 +1,73 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The simplest query you could ask against an Elasticsearch index is "match_all", which will bring you all documents inside an index. 
 
-Things you may want to cover:
+From the developer toolbox: 
 
-* Ruby version
+```jsx
+GET /kibana_sample_data_flights/_search
+{
+  "query" : {
+    "match_all": {}
+    
+  }
+} 
+```
 
-* System dependencies
+One step further would be to search for documents where a specific field matching a specific value:
 
-* Configuration
+```jsx
+GET /kibana_sample_data_flights/_search
+{
+  "query" : {
+    "match": {
+				"FIELD": "VALUE"
+			}
+  }
+} 
+```
 
-* Database creation
+There is one thing you should mind about "match" queries. The main difference of ES from a traditional database is that ES designed for searching text. Therefore, when you search for a certain term to match, ES looks for relevancy in the whole database.. TODO
 
-* Database initialization
+ [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html)
 
-* How to run the test suite
+There is a cheaper way to search in terms of computation:  filtering. When you filter for specific terms, ES doesn't calculate the relevancy score for your query, it filters only the documents fulfilling your query condition completely.  
 
-* Services (job queues, cache servers, search engines, etc.)
+You might see some documentation or articles showing examples with "filtered", this is a deprecated usage since ES 2.0. From ES 5.0 and on "bool" is the new term to build complex queries. 
 
-* Deployment instructions
+```jsx
+GET /kibana_sample_data_flights/_search
+{
+  "query": { 
+    "bool": { 
+      "filter": [ 
+        { "term":  { "language_id": 28  }},
+        { "term":  { "some_other_term": "some string value"}},
+        { "range": { "created_at_timestamp": { "gt": "2015-01-01" }}} 
+      ]
+    }
+  }
+}
+```
 
-* ...
+How would you create the same query with ruby DLS API ? 
+
+```ruby
+@filtered = search do
+                  query do
+                    bool do
+                      filter do
+                          term DestWeather: "Rain"
+                        end
+                        filter do
+                          term DestCountry: "IT"
+                        end
+                        filter do
+                          range :timestamp do
+                            gte 'now-100d'
+                        end
+                      end
+                    end
+                  end
+                end
+```
