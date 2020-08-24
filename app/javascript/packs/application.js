@@ -12,8 +12,8 @@ require("chart.js")
 require("jquery")
 require ("popper.js")
 import "bootstrap"
-import Chart from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Chart from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
 console.log('Hello from application.js')
 
