@@ -35,7 +35,7 @@
             <div class="chart-card">
               <h2>Top Isolated Categories</h2>
                 <div class="chart">
-                <%= bar_chart @chart_1,responsive: "true",id: "top_10_isolated_categories",xtitle:"Count"%>
+                <%= bar_chart @chart_1, messages: { empty: "No data" },responsive: "true",id: "top_10_isolated_categories",xtitle:"Count"%>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
             <div class="chart-card">
               <h2>Top Isolated Hostnames</h2>
                 <div class="chart">
-                <%= bar_chart @chart_2,  responsive: "true",id: "top_10_isolated_hostnames",xtitle:"Count"%>
+                <%= bar_chart @chart_2, messages: {empty: "No data"}, responsive: "true",id: "top_10_isolated_hostnames",xtitle:"Count"%>
               </div>
             </div>
           </div>

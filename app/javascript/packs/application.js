@@ -16,11 +16,23 @@ import Chart from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 
 // Change default options for ALL charts
+
+Chart.defaults.global.layout =  {
+
+    padding: {
+        left: 10,
+            right: 10,
+            top: 30,
+            bottom: 30
+    }
+}
+
+
 Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
     color: '#555',
     anchor: 'end',
     align : 'end',
-    offset: '8',
+    offset: '4',
 });
 
 
