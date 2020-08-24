@@ -5,27 +5,27 @@ require 'elasticsearch'
 require 'elasticsearch/persistence'
 require 'elasticsearch/dsl'
 
-MAPPINGS = JSON.parse(File.read('config/elasticsearch/mappings/logs.json'), symbolize_names: true).freeze
+# an external mapping might be fetched like below:
+# MAPPINGS = JSON.parse(File.read('config/elasticsearch/mappings/logs.json'), symbolize_names: true).freeze
 
 class DashboardController < ApplicationController
   include Elasticsearch::DSL
 
   def index
+
+    # for @repo constructor and initial settings look at /config/initializers/elasticsearch.rb
     @repo = Repository.new
-
     @interval = '100d'
-    # @repo.client.indices.put_mapping(index:"extension__url", body: MAPPINGS)
 
-    # creating new index and injecting logs in it
+    # @repo is sending queries to Isoolate indexes by "*__*" index pattern,
+    # in order to create a new index and populate with log data:
     # @new_repo.create_index! force: true
     # @new_repo.save(log)
 
-    # below are aggreagation queries written with ES DSL logic
+    # an example query for the last 100 day data belongs to user_id: "26" and aggregated by category name is:
+    # query_definition = filter_and_agg({ "message.user_id": '26' }, '100d', 'message.category_name.keyword')
+    # here are aggregation queries written with ElasticSearch DSL syntax for Isoolate dashboard:
 
-    # aggregate response based on term counts,
-    # first hash is to filter before aggreagating, e.g { type : 'phishing'}, leave empty to mathch all
-
-    # dashboard aggregation queries:
     top_10_isolated_categories = filter_and_agg({ "message.isolated": 'true' }, @interval, 'message.category_name.keyword')
     top_10_allowed_categories = filter_and_agg({ "message.blocked": 'false' }, @interval, 'message.category_name.keyword')
     top_10_phishing_hostnames = filter_and_agg({ type: 'phishing' }, @interval, 'message.host.keyword')
@@ -36,44 +36,8 @@ class DashboardController < ApplicationController
     top_10_blocked_categories = filter_and_agg({ "message.blocked": 'true' }, @interval, 'message.category_name.keyword')
     top_10_isolated_allowed_hostnames = filter_and_agg({ "message.blocked": 'false' }, @interval, 'message.category_name.keyword')
 
-    @match_all = match_all({})
+    match_all = match_all({})
 
-    # queries for kibana_sample_data_flights
-
-    @last_100d = filter_and_agg({ "message.user_id": '26' }, '100d', 'message.category_name.keyword')
-
-    @filtered = search do
-      query do
-        bool do
-          filter do
-            term "message.blocked": 'true'
-          end
-          filter do
-            range :timestamp do
-              gte 'now-100d'
-            end
-          end
-        end
-      end
-    end
-
-    @last = search do
-      query do
-        bool do
-          filter do
-            range :timestamp do
-              gte 'now-100d'
-            end
-          end
-        end
-      end
-    end
-
-    # @response = @repository.search(last_120d)
-
-    #  @aggregated_hostnames = repository.search(by_hostname_isolated).response.aggregations.my_aggregation.buckets
-    #  @aggregated_categories = repository.search(by_category_isolated).response.aggregations.my_aggregation.buckets
-    #  @chart_data = to_chart_data(@aggregated_hostnames)
 
     # bar chart 1
     @chart_1 = bucket_data(top_10_isolated_categories)
@@ -90,7 +54,7 @@ class DashboardController < ApplicationController
     @chart_6 = bucket_data(top_10_blocked_categories)
   end
 
-  #  below are DSL methods for creating queries, https://github.com/elastic/elasticsearch-ruby/tree/master/elasticsearch-dsl
+  # below are DSL methods for creating queries, https://github.com/elastic/elasticsearch-ruby/tree/master/elasticsearch-dsl
 
   def match_all(option)
     search do
@@ -104,7 +68,7 @@ class DashboardController < ApplicationController
     search do
       if match_term == {}
         query do
-          match_all {}
+          match_all({})
         end
       else
         query do
@@ -124,7 +88,7 @@ class DashboardController < ApplicationController
     search do
       if filter_term == {}
         query do
-          match_all {}
+          match_all({})
         end
       else
         query do
@@ -148,7 +112,7 @@ class DashboardController < ApplicationController
     end
   end
 
-
+  # the function converting the repsonse aggregation data into the array format Chartkick accepts
   def bucket_data(query)
     buckets = @repo.search(query).response.aggregations.my_aggregation.buckets
     buckets.map { |bucket| [bucket['key'], bucket['doc_count']] }
