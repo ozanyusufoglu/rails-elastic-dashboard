@@ -15,7 +15,15 @@ import "bootstrap"
 import Chart from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-console.log('Hello from application.js')
+// Change default options for ALL charts
+Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
+    color: '#555',
+    anchor: 'end',
+    align : 'end',
+    offset: '8',
+});
+
+
 
 
 
