@@ -1,15 +1,15 @@
 <div class="container-fluid">
 
-  <% Chartkick.options = { colors: ["#63b598", "#ce7d78","#318fb5","#ea9e70","#a48a9e","#c26565","#ffd571","#b4caa0", "#b0cac7","#e3848a"] } %>
-    <%# <%  Chartkick.options = { colors: ["#003f5c", "#2f4b7c","#665191","#a05195","#d45087","#f95d6a","#ff7c43","#ffa600", "#3288bd","#5e4fa2"] } %>
+  <% Chartkick.options = { colors: ["#63b598", "#ce7d78","#318fb5","#ea9e70","#a48a9e","#c26565","#ffd571","#b4caa0", "#b0cac7","#BF5D41"] } %>
+    <% # Chartkick.options = { colors: [ "#665191", "#905196", "#b85091", "#db5184","#f55a6f", "#ff6d55", "#ff8836", "#ffa600", "#ff8836","#ff6d55"] } %>
 
       <div class="container-fluid chart-area">
 
-      <div>
+      <div id="input-area">
         <div class="input-group">
           <input type="text" class="form-control" aria-label="Text input with dropdown button">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter Date</button>
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Time Range</button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">Last Hour</a>
               <a class="dropdown-item" href="#">Last Day</a>
@@ -26,8 +26,6 @@
             Refresh
           </button>
         </div>
-
-
 
 
         <div class="row">
@@ -82,20 +80,22 @@
         <div class="row">
           <div class="col-lg-6 ">
             <div class="chart-card">
-
+            <h2>Top 10 Blocked Categories</h2>
               <div class="chart">
-                <%= column_chart @chart_6, title: "Top 10 Blocked Categories", responsive: "true",id: "top_categories_column", responsive: "true", xtitle:"Count"%>
+                <%= column_chart @chart_6, responsive: "true",id: "top_categories_column", responsive: "true", ytitle:"Count"%>
               </div>
             </div>
           </div>
 
           <div class="col-lg-6">
             <div class="chart-card">
+              <h2>Top 10 Allowed & Isolated Sites</h2>
               <div class="chart">
-                <%= column_chart @chart_2, title:"Top 10 Isolated and Allowed Sites", responsive: "true",id: "top_categories_copy", responsive: "true", xtitle:"Count" %>
+                <%= column_chart @chart_7, responsive: "true",id: "top_categories_copy", responsive: "true", ytitle:"Count" %>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>

@@ -16,7 +16,6 @@ import Chart from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 
 // Change default options for ALL charts
-
 Chart.defaults.global.layout =  {
 
     padding: {
@@ -27,7 +26,7 @@ Chart.defaults.global.layout =  {
     }
 }
 
-
+// Change default options for datalabel for ALL charts
 Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
     color: '#555',
     anchor: 'end',
