@@ -17,9 +17,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels'
 
 // Change default options for ALL charts
 Chart.defaults.global.layout =  {
-
     padding: {
-        left: 10,
+            left: 10,
             right: 10,
             top: 30,
             bottom: 30
@@ -33,10 +32,6 @@ Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
     align : 'end',
     offset: '4',
 });
-
-
-
-
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
