@@ -38,19 +38,19 @@ class DashboardController < ApplicationController
     match_all = match_all({})
 
 
-    # bar chart 1
+    # bar-chart 1
     @chart_1 = bucket_data(top_10_isolated_categories)
-    # bar chart 2
+    # bar-chart 2
     @chart_2 = bucket_data(top_10_allowed_categories)
-    # column chart
+    # column-chart-1
     @chart_3 = bucket_data(top_10_phishing_hostnames)
-    # pie chart 1
+    # pie-chart 1
     @chart_4 = bucket_data(top_10_blocked_hostnames)
-    # pie chart 2
+    # pie-chart 2
     @chart_5 = bucket_data(top_10_browsed)
-    # bar chart 3
+    # bar-chart 3
     @chart_6 = bucket_data(top_10_blocked_categories)
-    # bar chart 4
+    # bar-chart 4
     @chart_7 = bucket_data(top_10_isolated_allowed_hostnames)
   end
 

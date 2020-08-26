@@ -31,25 +31,25 @@
         <div class="row">
           <div class="col-lg-4">
             <div class="chart-card">
-              <h2>Top Isolated Categories</h2>
+              <h2>Top 10 Isolated Categories</h2>
                 <div class="chart">
-                <%= bar_chart @chart_1, messages: { empty: "No data" },responsive: "true",id: "top_10_isolated_categories",xtitle:"Count"%>
+                <%= bar_chart @chart_1, responsive: "true",id: "top_10_isolated_categories",xtitle:"Count"%>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4">
             <div class="chart-card">
-              <h2>Top Isolated Hostnames</h2>
+              <h2>Top 10 Allowed Categories </h2>
                 <div class="chart">
-                <%= bar_chart @chart_2, messages: {empty: "No data"}, responsive: "true",id: "top_10_isolated_hostnames",xtitle:"Count"%>
+                <%= bar_chart @chart_2, responsive: "true",id: "top_10_allowed_categories",xtitle:"Count"%>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4">
             <div class="chart-card">
-              <h2>Top Phishing Hostnames</h2>
+              <h2>Top 10 Phishing Sites</h2>
               <div class="chart">
                 <%= column_chart @chart_3, responsive: "true",id: "top_10_phishing_hostnames",xtitle:"Hostnames",ytitle:"Count" %>
               </div>
@@ -71,7 +71,7 @@
             <div class="chart-card">
                 <h2>Top 10 Browsed Sites</h2>
               <div class="chart">
-                <%= pie_chart @chart_5, responsive: "true", id: "top_categories", donut:true, label: "doc_count", legend: "left", responsive: "true" %>
+                <%= pie_chart @chart_5, responsive: "true", id: "top_10_browsed", donut:true, label: "doc_count", legend: "left", responsive: "true" %>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
             <div class="chart-card">
             <h2>Top 10 Blocked Categories</h2>
               <div class="chart">
-                <%= column_chart @chart_6, responsive: "true",id: "top_categories_column", responsive: "true", ytitle:"Count"%>
+                <%= column_chart @chart_6, responsive: "true",id: "top_10_blocked_categories", responsive: "true", ytitle:"Count"%>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@
             <div class="chart-card">
               <h2>Top 10 Allowed & Isolated Sites</h2>
               <div class="chart">
-                <%= column_chart @chart_7, responsive: "true",id: "top_categories_copy", responsive: "true", ytitle:"Count" %>
+                <%= column_chart @chart_7, responsive: "true",id: "top_10_isolated_allowed_hostnames", responsive: "true", ytitle:"Count" %>
               </div>
             </div>
           </div>
