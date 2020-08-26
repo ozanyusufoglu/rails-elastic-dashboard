@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
       # @new_repo.save(log)
 
     @repo = Repository.new
-    @interval = '100d'
+    @interval = '30d'
 
     # An example query for the last 100 day data belongs to user_id: "26" and aggregated by category name is:
       # query_definition = filter_and_agg({ "message.user_id": '26' }, '100d', 'message.category_name.keyword')
@@ -31,11 +31,9 @@ class DashboardController < ApplicationController
     top_10_allowed_categories = filter_and_agg({ "message.blocked": 'false' }, @interval, 'message.category_name.keyword')
     top_10_phishing_hostnames = filter_and_agg({ type: 'phishing' }, @interval, 'message.host.keyword')
     top_10_blocked_hostnames = filter_and_agg({ "message.blocked": 'true' }, @interval, 'message.host.keyword')
-    top_10_browsed = filter_and_agg({}, @interval, 'message.host.keyword')
+    top_10_browsed = filter_and_agg("match_all", @interval, 'message.host.keyword')
     top_10_blocked_categories = filter_and_agg({ "message.blocked": 'true' }, @interval, 'message.category_name.keyword')
     top_10_isolated_allowed_hostnames = filter_twice_and_agg({ "message.isolated": "true" }, { "message.blocked": "false"}, @interval, "message.host.keyword")
-
-    match_all = match_all({})
 
 
     # bar-chart 1
@@ -56,17 +54,9 @@ class DashboardController < ApplicationController
 
   # below are query methods written with DSL syntax, https://github.com/elastic/elasticsearch-ruby/tree/master/elasticsearch-dsl
 
-  def match_all(option)
-    search do
-      query do
-        match_all option
-      end
-    end
-  end
-
   def aggregate_by_term(match_term, agg_term)
     search do
-      if match_term == {}
+      if match_term == "match_all"
         query do
           match_all({})
         end
@@ -86,9 +76,18 @@ class DashboardController < ApplicationController
 
   def filter_and_agg(filter_term, interval, agg_term)
     search do
-      if filter_term == {}
+      if filter_term == "match_all"
         query do
-          match_all({})
+          bool do
+            filter do
+              term level:"info"
+            end
+            filter do
+              range :timestamp do
+                gte 'now-' + interval
+              end
+            end
+          end
         end
       else
         query do
