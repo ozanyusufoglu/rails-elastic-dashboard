@@ -33,7 +33,7 @@ class DashboardController < ApplicationController
     top_10_blocked_hostnames = filter_and_agg({ "message.blocked": 'true' }, @interval, 'message.host.keyword')
     top_10_browsed = filter_and_agg({}, @interval, 'message.host.keyword')
     top_10_blocked_categories = filter_and_agg({ "message.blocked": 'true' }, @interval, 'message.category_name.keyword')
-    top_10_isolated_allowed_hostnames = filter_twice_and_agg({ "message.blocked": 'false' }, {"message.isolated": "true"}, @interval, 'message.category_name.keyword')
+    top_10_isolated_allowed_hostnames = filter_twice_and_agg({ "message.isolated": "true" }, { "message.blocked": "false"}, @interval, "message.host.keyword")
 
     match_all = match_all({})
 
