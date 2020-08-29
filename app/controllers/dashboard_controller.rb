@@ -35,6 +35,9 @@ class DashboardController < ApplicationController
     top_10_blocked_categories = filter_and_agg({ "message.blocked": 'true' }, @interval, 'message.category_name.keyword')
     top_10_isolated_allowed_hostnames = filter_twice_and_agg({ "message.isolated": "true" }, { "message.blocked": "false"}, @interval, "message.host.keyword")
 
+    user_logs = only_filter({"message.user_id.keyword":"26"}, @interval)
+
+    @logs = @repo.search(user_logs)
 
     # bar-chart 1
     @chart_1 = bucket_data(top_10_isolated_categories)
@@ -54,21 +57,18 @@ class DashboardController < ApplicationController
 
   # below are query methods written with DSL syntax, https://github.com/elastic/elasticsearch-ruby/tree/master/elasticsearch-dsl
 
-  def aggregate_by_term(match_term, agg_term)
+  def only_filter(filter_term,interval)
     search do
-      if match_term == "match_all"
-        query do
-          match_all({})
-        end
-      else
-        query do
-          match match_term
-        end
-      end
-
-      aggregation :my_aggregation do
-        terms do
-          field agg_term
+      query do
+        bool do
+          filter do
+            term filter_term
+          end
+          filter do
+            range :timestamp do
+              gte 'now-' + interval
+            end
+          end
         end
       end
     end
@@ -103,7 +103,6 @@ class DashboardController < ApplicationController
           end
         end
       end
-
       aggregation :my_aggregation do
         terms do
           field agg_term
@@ -149,3 +148,4 @@ class DashboardController < ApplicationController
     buckets.map { |bucket| [bucket['key'], bucket['doc_count']] }
   end
 end
+
