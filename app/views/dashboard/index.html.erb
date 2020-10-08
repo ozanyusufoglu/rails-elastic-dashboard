@@ -100,5 +100,7 @@
     </div>
   </div>
 
-  <%= @logs.results %>
+  <% @logs.results.each do |log| %>
+   <div><%=log.to_hash['timestamp'] %></div>
+  <% end %>
 

@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
       # @new_repo.save(log)
 
     @repo = Repository.new
-    @interval = '30d'
+    @interval = '100d'
 
     # An example query for the last 100 day data belongs to user_id: "26" and aggregated by category name is:
       # query_definition = filter_and_agg({ "message.user_id": '26' }, '100d', 'message.category_name.keyword')
@@ -59,6 +59,11 @@ class DashboardController < ApplicationController
 
   def only_filter(filter_term,interval)
     search do
+      from 0
+      size 100
+      sort do
+        by :timestamp, order: 'desc'
+      end
       query do
         bool do
           filter do
